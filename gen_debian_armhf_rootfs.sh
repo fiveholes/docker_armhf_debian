@@ -46,7 +46,7 @@ fi
 # 1st stage
 #
 mkdir -p $rootfs
-debootstrap --foreign --arch $architecture $deb_release $rootfs $deb_local_mirror
+debootstrap --foreign --arch $architecture --variant=minbase $deb_release $rootfs $deb_local_mirror
 cp /usr/bin/qemu-arm-static ${rootfs}/usr/bin/
 
 #
@@ -88,6 +88,7 @@ EOF
 
 cat << EOF > ${rootfs}/third-stage
 #!/bin/bash
+rm -rf /debootstrap
 debconf-set-selections /debconf.set
 rm -f /debconf.set
 apt-get update
