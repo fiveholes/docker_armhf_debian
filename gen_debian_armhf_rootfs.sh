@@ -28,15 +28,12 @@ mkdir -p $output_dir
 #
 # Debian parameters
 #
-#deb_mirror="http://http.debian.net/debian"
-deb_mirror="http://ftp.tw.debian.org/debian"
-#deb_local_mirror="http://debian.kmp.or.at:3142/debian"
+deb_mirror="http://ftp.halifax.rwth-aachen.de/debian" # Debian mirror nearby
 
-deb_release="jessie"
+deb_release="stretch"
 rootfs="${work_dir}/rootfs"
 
 architecture="armhf"
-#architecture="armel"
 
 if [ "$deb_local_mirror" == "" ]; then
   deb_local_mirror=$deb_mirror
@@ -62,7 +59,7 @@ EOF
 echo "bsms" > ${rootfs}/etc/hostname
 
 cat << EOF > ${rootfs}/etc/resolv.conf
-nameserver 8.8.8.8
+nameserver 85.214.20.141 # https://digitalcourage.de/support/zensurfreier-dns-server
 EOF
 
 cat << EOF > ${rootfs}/etc/network/interfaces
